@@ -1,13 +1,12 @@
 
 
 import Contact from "../Contact/Contakt"
+import { nanoid } from "nanoid"
 
-export default function ContactList({values}) {
-  return (
-    <ul>
-      {values.map((value) => (
-        <li key={value.id}><Contact contacts={value} /></li>
-      ))}
-  </ul>
-)
+export default function ContactList({data, onDelete}) {
+  
+ const contacts = data.map((contact) => {
+        return <li key={nanoid()}><Contact contact={contact} onDelete={onDelete}></Contact></li>
+    })
+    return (<ul>{contacts }</ul>)
 }

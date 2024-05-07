@@ -1,11 +1,16 @@
 
 
-export default function SearchBox({handleChange}) {
+export default function SearchBox({ value, OnSearch }) {
+  
+
   
   return (
     <div>
-      <p>Find contacts by name</p>
-      <input type="text" onChange={handleChange}/>
-    </div>
-  )
+      <span>Find contacts by name</span>
+      <input
+        type="text"
+        value={value}
+        onChange={(event) => OnSearch(event.target.value)}
+      />
+    </div>)
 }

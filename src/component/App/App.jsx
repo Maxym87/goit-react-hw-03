@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ContactForm from "../ContactForm/ContactForm"
 import SearchBox from "../SearchBox/SearchBox"
 import ContactList from "../ContactList/ContactList"
+import { nanoid } from "nanoid";
 
 
 
@@ -17,20 +18,45 @@ const initialTasks = [
 
 export default function App() {
 
-  const [tasks, setTasks] = useState(initialTasks)
-  const [nameToSearch, setNameToSearch] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts'))
 
-  const handleChange = (event) => {
-setNameToSearch(event.target.value)
+    if (savedContacts !== null) {
+      return savedContacts;
+    }
+
+    return initialTasks;
+  });
+
+  const addContact = (newContact) => {
+    setContacts((prevContacts) => {
+      newContact.id = nanoid()
+      return [...prevContacts, newContact]
+    })
   }
+
+  const deleteContact = (id) => {
+    setContacts((prevContacts) => {
+      return prevContacts.filter(contact => contact.id !== id)
+    })
+  };
+
+  const filteredContacts = contacts.filter(contact => {
+    return contact.name.toLowerCase().includes(inputValue.toLowerCase().trim())
+  });
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts), [contacts])
+  })
 
 
   return (
     <div>
   <h1>Phonebook</h1>
-  <ContactForm />
-  <SearchBox handleChange={handleChange}/>
-  <ContactList values={tasks} />
+      <ContactForm onAdd={addContact} />
+      <SearchBox value={inputValue} OnSearch={setInputValue} />
+  <ContactList data={filteredContacts} onDelete={deleteContact} />
 </div>
   )
 }

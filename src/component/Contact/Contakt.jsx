@@ -1,12 +1,13 @@
 
 
 
-export default function Contact({contacts: {name, number}}) {
+export default function Contact({ contact: {name, number, id}, onDelete }) {
+  
   return (
     <div>
       <p>{name}</p>
       <p>{number}</p>
-      <button type="buttin">Delete</button>
-   </div>
+      <button onClick={() => {onDelete(id)}}>Delete</button>
+</div>
  )
 }

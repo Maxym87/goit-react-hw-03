@@ -1,6 +1,6 @@
 
 
-import Contact from "../Contact/Contact"
+import Contact from "../../components/Contact/Contact"
 import { nanoid } from "nanoid"
 import css from './ContactList.module.css'
 

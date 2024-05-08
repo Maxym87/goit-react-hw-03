@@ -1,0 +1,13 @@
+.box {
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+
+.text {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 300px;
+}

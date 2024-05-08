@@ -1,0 +1,23 @@
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.btn {
+  height: 30px;
+}
